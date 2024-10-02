@@ -10,11 +10,20 @@ body {
 }
 
 .game-container {
-    text-align: center;
+    display: flex;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.game-column {
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.leaderboard-column {
+    width: 250px;
 }
 
 h1, h2 {
@@ -87,11 +96,11 @@ button:hover {
 }
 
 #high-scores {
-    margin-top: 20px;
+    height: 100%;
 }
 
 .leaderboard-container {
-    max-height: 200px;
+    height: calc(100vh - 200px);
     overflow-y: auto;
     border: 1px solid #bdc3c7;
     border-radius: 5px;

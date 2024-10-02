@@ -9,23 +9,27 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Elegant Snake</h1>
-        <div id="game-board"></div>
-        <div class="info-panel">
-            <p>Score: <span id="score">0</span></p>
-            <button id="start-btn">Start Game</button>
+        <div class="game-column">
+            <h1>Elegant Snake</h1>
+            <div id="game-board"></div>
+            <div class="info-panel">
+                <p>Score: <span id="score">0</span></p>
+                <button id="start-btn">Start Game</button>
+            </div>
+            <div id="game-over" class="hidden">
+                <h2>Game Over</h2>
+                <p>Your score: <span id="final-score"></span></p>
+                <input type="text" id="name-input" placeholder="Enter your name">
+                <button id="submit-score">Post Score</button>
+                <button id="new-game">New Game</button>
+            </div>
         </div>
-        <div id="game-over" class="hidden">
-            <h2>Game Over</h2>
-            <p>Your score: <span id="final-score"></span></p>
-            <input type="text" id="name-input" placeholder="Enter your name">
-            <button id="submit-score">Post Score</button>
-            <button id="new-game">New Game</button>
-        </div>
-        <div id="high-scores">
-            <h2>High Scores</h2>
-            <div class="leaderboard-container">
-                <ol id="high-scores-list"></ol>
+        <div class="leaderboard-column">
+            <div id="high-scores">
+                <h2>High Scores</h2>
+                <div class="leaderboard-container">
+                    <ol id="high-scores-list"></ol>
+                </div>
             </div>
         </div>
     </div>
