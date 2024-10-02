@@ -3,12 +3,15 @@ import { backend } from 'declarations/backend';
 const GRID_SIZE = 20;
 const CELL_SIZE = 20;
 const INITIAL_SNAKE_LENGTH = 3;
+const INITIAL_SPEED = 200; // milliseconds
+const SPEED_INCREMENT = 2; // milliseconds to decrease per point
 
 let snake = [];
 let direction = 'right';
 let food = null;
 let gameInterval = null;
 let score = 0;
+let currentSpeed = INITIAL_SPEED;
 
 const gameBoard = document.getElementById('game-board');
 const scoreElement = document.getElementById('score');
@@ -19,17 +22,6 @@ const nameInput = document.getElementById('name-input');
 const submitScoreButton = document.getElementById('submit-score');
 const newGameButton = document.getElementById('new-game');
 const highScoresList = document.getElementById('high-scores-list');
-
-// Define speed levels and thresholds
-const speedLevels = [
-    { threshold: 0, interval: 200 },
-    { threshold: 5, interval: 180 },
-    { threshold: 10, interval: 160 },
-    { threshold: 15, interval: 140 },
-    { threshold: 20, interval: 120 },
-    { threshold: 25, interval: 100 },
-    { threshold: 30, interval: 80 },
-];
 
 function createGrid() {
     gameBoard.innerHTML = '';
@@ -47,6 +39,7 @@ function initializeGame() {
     }
     direction = 'right';
     score = 0;
+    currentSpeed = INITIAL_SPEED;
     scoreElement.textContent = score;
     createFood();
     render();
@@ -115,18 +108,13 @@ function gameOver() {
 }
 
 function getCurrentSpeed() {
-    for (let i = speedLevels.length - 1; i >= 0; i--) {
-        if (score >= speedLevels[i].threshold) {
-            return speedLevels[i].interval;
-        }
-    }
-    return speedLevels[0].interval;
+    return Math.max(INITIAL_SPEED - (score * SPEED_INCREMENT), 50); // Minimum speed of 50ms
 }
 
 function updateGameSpeed() {
     clearInterval(gameInterval);
-    const speed = getCurrentSpeed();
-    gameInterval = setInterval(moveSnake, speed);
+    currentSpeed = getCurrentSpeed();
+    gameInterval = setInterval(moveSnake, currentSpeed);
 }
 
 function startGame() {
