@@ -132,9 +132,12 @@ submitScoreButton.addEventListener('click', async () => {
 async function updateHighScores() {
     const highScores = await backend.getHighScores();
     highScoresList.innerHTML = '';
-    highScores.forEach(([name, score]) => {
+    highScores.forEach(([name, score], index) => {
         const li = document.createElement('li');
         li.textContent = `${name}: ${score}`;
+        if (index < 3) {
+            li.classList.add(`top-${index + 1}`);
+        }
         highScoresList.appendChild(li);
     });
 }

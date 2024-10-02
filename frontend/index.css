@@ -90,9 +90,18 @@ button:hover {
     margin-top: 20px;
 }
 
+.leaderboard-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 #high-scores-list {
     padding-left: 20px;
     list-style-type: none;
+    margin: 0;
 }
 
 input[type="text"] {
@@ -113,4 +122,19 @@ input[type="text"] {
 
 #high-scores-list li:hover {
     background-color: #e9ecef;
+}
+
+#high-scores-list li.top-1 {
+    background-color: #ffd700;
+    font-weight: bold;
+}
+
+#high-scores-list li.top-2 {
+    background-color: #c0c0c0;
+    font-weight: bold;
+}
+
+#high-scores-list li.top-3 {
+    background-color: #cd7f32;
+    font-weight: bold;
 }
