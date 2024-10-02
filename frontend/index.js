@@ -17,6 +17,7 @@ const gameOverElement = document.getElementById('game-over');
 const finalScoreElement = document.getElementById('final-score');
 const nameInput = document.getElementById('name-input');
 const submitScoreButton = document.getElementById('submit-score');
+const newGameButton = document.getElementById('new-game');
 const highScoresList = document.getElementById('high-scores-list');
 
 function createGrid() {
@@ -108,6 +109,7 @@ function startGame() {
 }
 
 startButton.addEventListener('click', startGame);
+newGameButton.addEventListener('click', startGame);
 
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
