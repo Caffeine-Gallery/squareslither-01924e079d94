@@ -20,6 +20,17 @@ const submitScoreButton = document.getElementById('submit-score');
 const newGameButton = document.getElementById('new-game');
 const highScoresList = document.getElementById('high-scores-list');
 
+// Define speed levels and thresholds
+const speedLevels = [
+    { threshold: 0, interval: 200 },
+    { threshold: 5, interval: 180 },
+    { threshold: 10, interval: 160 },
+    { threshold: 15, interval: 140 },
+    { threshold: 20, interval: 120 },
+    { threshold: 25, interval: 100 },
+    { threshold: 30, interval: 80 },
+];
+
 function createGrid() {
     gameBoard.innerHTML = '';
     for (let i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
@@ -89,6 +100,7 @@ function moveSnake() {
         score++;
         scoreElement.textContent = score;
         createFood();
+        updateGameSpeed();
     } else {
         snake.pop();
     }
@@ -102,10 +114,25 @@ function gameOver() {
     finalScoreElement.textContent = score;
 }
 
+function getCurrentSpeed() {
+    for (let i = speedLevels.length - 1; i >= 0; i--) {
+        if (score >= speedLevels[i].threshold) {
+            return speedLevels[i].interval;
+        }
+    }
+    return speedLevels[0].interval;
+}
+
+function updateGameSpeed() {
+    clearInterval(gameInterval);
+    const speed = getCurrentSpeed();
+    gameInterval = setInterval(moveSnake, speed);
+}
+
 function startGame() {
     initializeGame();
     gameOverElement.classList.add('hidden');
-    gameInterval = setInterval(moveSnake, 100);
+    updateGameSpeed();
 }
 
 startButton.addEventListener('click', startGame);
